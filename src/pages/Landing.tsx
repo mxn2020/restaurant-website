@@ -1,15 +1,15 @@
 // src/pages/Landing.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Database, Zap, Code, Globe, Users, Star, User } from 'lucide-react';
+import { Calendar, Clock, Users, Star, Phone, MapPin, Mail, ChefHat, Utensils, Wine, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, Card, CardContent, Badge, Header, Nav, Section, Span, H1, H2, P, Div, Footer } from '../lib/dev-container';
+import { Container, Button, Card, CardContent, Badge, Header, Nav, Section, Span, H1, H2, H3, P, Div, Footer } from '../lib/dev-container';
 import { useAuth } from '../components/auth/AuthProvider';
 import type { ComponentRegistryId } from '../registry/componentRegistry';
 
 // Helper functions to ensure type safety for dynamic IDs
-const getStatCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['stat-card-0', 'stat-card-1', 'stat-card-2', 'stat-card-3'];
+const getMenuItemId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['menu-item-0', 'menu-item-1', 'menu-item-2', 'menu-item-3', 'menu-item-4', 'menu-item-5'];
   return ids[index] || 'noID';
 };
 
@@ -18,403 +18,654 @@ const getFeatureCardId = (index: number): ComponentRegistryId => {
   return ids[index] || 'noID';
 };
 
-const getTechLetterId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-letter-0', 'tech-letter-1', 'tech-letter-2', 'tech-letter-3', 'tech-letter-4', 'tech-letter-5'];
-  return ids[index] || 'noID';
-};
-
-const getTechBadgeId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-badge-0', 'tech-badge-1', 'tech-badge-2', 'tech-badge-3', 'tech-badge-4', 'tech-badge-5'];
+const getTestimonialId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['testimonial-0', 'testimonial-1', 'testimonial-2'];
   return ids[index] || 'noID';
 };
 
 export const Landing: React.FC = () => {
   const [mounted, setMounted] = useState(false);
+  const [reservationForm, setReservationForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
+    guests: '2',
+    specialRequests: ''
+  });
   const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const handleReservationSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle reservation submission
+    console.log('Reservation submitted:', reservationForm);
+    alert('Reservation request submitted! We will contact you shortly to confirm.');
+    setReservationForm({
+      name: '',
+      email: '',
+      phone: '',
+      date: '',
+      time: '',
+      guests: '2',
+      specialRequests: ''
+    });
+  };
+
   const features = [
     {
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Lightning Fast",
-      description: "Built with Vite for instant hot module replacement and blazing fast builds"
+      icon: <ChefHat className="w-12 h-12 text-red-500" />,
+      title: "Master Chefs",
+      description: "Our experienced chefs create culinary masterpieces using the finest ingredients"
     },
     {
-      icon: <Database className="w-8 h-8 text-green-500" />,
-      title: "MongoDB + Prisma",
-      description: "Type-safe database access with MongoDB flexibility and Prisma's developer experience"
+      icon: <Utensils className="w-12 h-12 text-red-500" />,
+      title: "Fine Dining",
+      description: "Elegant atmosphere with impeccable service for an unforgettable dining experience"
     },
     {
-      icon: <Code className="w-8 h-8 text-blue-500" />,
-      title: "TypeScript Ready",
-      description: "Full TypeScript support with strict type checking and IntelliSense"
+      icon: <Wine className="w-12 h-12 text-red-500" />,
+      title: "Premium Wines",
+      description: "Carefully curated wine selection to perfectly complement your meal"
     },
     {
-      icon: <Globe className="w-8 h-8 text-purple-500" />,
-      title: "Deploy Anywhere",
-      description: "Ready for Netlify, Vercel, or any modern hosting platform"
+      icon: <Star className="w-12 h-12 text-red-500" />,
+      title: "5-Star Service",
+      description: "Exceptional service that exceeds expectations every single time"
     }
   ];
 
-  const stats = [
-    { label: "Build Time", value: "< 2s" },
-    { label: "Bundle Size", value: "< 50KB" },
-    { label: "TypeScript", value: "100%" },
-    { label: "Performance", value: "A+" }
+  const menuHighlights = [
+    {
+      name: "Wagyu Beef Tenderloin",
+      description: "Premium wagyu beef with truffle sauce and seasonal vegetables",
+      price: "$85",
+      category: "Main Course"
+    },
+    {
+      name: "Fresh Atlantic Salmon",
+      description: "Pan-seared salmon with lemon herb butter and wild rice",
+      price: "$42",
+      category: "Seafood"
+    },
+    {
+      name: "Lobster Bisque",
+      description: "Rich and creamy lobster bisque with cognac and fresh herbs",
+      price: "$28",
+      category: "Appetizer"
+    },
+    {
+      name: "Chocolate Soufflé",
+      description: "Decadent chocolate soufflé with vanilla bean ice cream",
+      price: "$18",
+      category: "Dessert"
+    },
+    {
+      name: "Duck Confit",
+      description: "Slow-cooked duck leg with cherry gastrique and roasted potatoes",
+      price: "$38",
+      category: "Main Course"
+    },
+    {
+      name: "Tuna Tartare",
+      description: "Fresh yellowfin tuna with avocado, citrus, and sesame",
+      price: "$24",
+      category: "Appetizer"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      rating: 5,
+      comment: "Absolutely incredible dining experience! The food was exceptional and the service was flawless."
+    },
+    {
+      name: "Michael Chen",
+      rating: 5,
+      comment: "Best restaurant in the city. The ambiance is perfect for special occasions and the wine selection is outstanding."
+    },
+    {
+      name: "Emily Rodriguez",
+      rating: 5,
+      comment: "Every dish was a work of art. The attention to detail and flavor combinations were simply amazing."
+    }
   ];
 
   return (
-    <Container componentId="landing-page-root"> {/* Changed to direct ID */}
+    <Container componentId="restaurant-landing-page">
       <Div 
         devId="main-wrapper" 
         devName="Main Wrapper" 
-        devDescription="Main page wrapper with gradient background"
-        className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+        devDescription="Main page wrapper with black background"
+        className="min-h-screen bg-black text-white"
       >
-      {/* Header */}
-      <Header 
-        devId="main-header" 
-        devName="Main Header" 
-        devDescription="Primary site header with navigation"
-        className="container mx-auto px-4 py-6"
-      >
-        <Nav 
-          devId="main-nav" 
-          devName="Main Navigation" 
-          devDescription="Primary navigation bar"
-          className="flex items-center justify-between"
+        {/* Header */}
+        <Header 
+          devId="restaurant-header" 
+          devName="Restaurant Header" 
+          devDescription="Primary restaurant header with navigation"
+          className="container mx-auto px-4 py-6"
         >
-          <Div 
-            devId="logo-section" 
-            devName="Logo Section" 
-            devDescription="Company logo and brand name"
-            className="flex items-center space-x-2"
+          <Nav 
+            devId="restaurant-nav" 
+            devName="Restaurant Navigation" 
+            devDescription="Primary navigation bar"
+            className="flex items-center justify-between"
           >
-            <Div devId="noID" className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Code className="w-5 h-5 text-white" />
-            </Div>
-            <Span 
-              devId="brand-name" 
-              devName="Brand Name" 
-              devDescription="Geenius Template brand name"
-              className="text-xl font-bold text-white"
-            >
-              Geenius Template
-            </Span>
-          </Div>
-          <Div 
-            devId="nav-actions" 
-            devName="Navigation Actions" 
-            devDescription="Navigation buttons and user menu"
-            className="flex items-center space-x-4"
-          >
-            <Button 
-              devId="docs-button" 
-              devName="Docs Button" 
-              devDescription="Link to documentation"
-              variant="ghost" 
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Docs
-            </Button>
-            {isAuthenticated ? (
-              <Div 
-                devId="user-section" 
-                devName="User Section" 
-                devDescription="Authenticated user welcome area"
-                className="flex items-center space-x-4"
-              >
-                <Span 
-                  devId="welcome-message" 
-                  devName="Welcome Message" 
-                  devDescription="Welcome message for authenticated user"
-                  className="text-gray-300"
-                >
-                  Welcome, {user?.name?.split(' ')[0]}!
-                </Span>
-                <Link to="/dashboard">
-                  <Button 
-                    devId="nav-dashboard-button"
-                    devName="Navigation Dashboard Button"
-                    devDescription="Dashboard button in navigation header for authenticated users"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    <User className="w-4 h-4 mr-2" />
-                    Dashboard
-                  </Button>
-                </Link>
-              </Div>
-            ) : (
-              <Div 
-                devId="auth-buttons" 
-                devName="Authentication Buttons" 
-                devDescription="Login and register buttons for unauthenticated users"
-                className="flex items-center space-x-2"
-              >
-                <Link to="/login">
-                  <Button 
-                    devId="nav-login-button"
-                    devName="Navigation Login Button"
-                    devDescription="Login button in navigation header"
-                    variant="ghost" 
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button 
-                    devId="nav-register-button"
-                    devName="Navigation Register Button"
-                    devDescription="Get started button in navigation header"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-              </Div>
-            )}
-          </Div>
-        </Nav>
-      </Header>
-
-      {/* Hero Section */}
-      <Container componentId="hero-section"> {/* Changed to direct ID */}
-        <Section 
-          devId="hero-content" 
-          devName="Hero Content" 
-          devDescription="Main hero Section with title and call-to-action"
-          className="container mx-auto px-4 py-20 text-center"
-        >
-          <Div 
-            devId="hero-content-wrapper" 
-            devName="Hero Content Wrapper" 
-            devDescription="Animated wrapper for hero content"
-            className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            <H1 
-              devId="hero-title" 
-              devName="Hero Title" 
-              devDescription="Main hero title showcasing the tech stack"
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
-            >
-              Vite + React + 
-              <Span 
-                devId="mongodb-highlight" 
-                devName="MongoDB Highlight" 
-                devDescription="Highlighted MongoDB text in gradient"
-                className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
-              >
-                {' '}MongoDB
-              </Span>
-            </H1>
-            <P 
-              devId="hero-description" 
-              devName="Hero Description" 
-              devDescription="Hero Section description explaining the template benefits"
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
-            >
-              Modern full-stack template with lightning-fast development, type-safe database access, 
-              and production-ready deployment configuration.
-            </P>
             <Div 
-              devId="hero-cta-buttons" 
-              devName="Hero CTA Buttons" 
-              devDescription="Call-to-action buttons in hero Section"
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              devId="restaurant-logo" 
+              devName="Restaurant Logo" 
+              devDescription="Restaurant logo and brand name"
+              className="flex items-center space-x-3"
             >
-              {isAuthenticated ? (
-                <Link to="/dashboard">
-                  <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
-                  >
-                    Go to Dashboard
-                  </Button>
-                </Link>
-              ) : (
-                <Link to="/register">
-                  <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
-                  >
-                    Start Building
-                  </Button>
-                </Link>
-              )}
-              <Button 
-                devId="hero-github-button"
-                devName="View on GitHub Button"
-                devDescription="Secondary button to view the project on GitHub"
-                variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+              <Div devId="noID" className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center">
+                <ChefHat className="w-7 h-7 text-white" />
+              </Div>
+              <Span 
+                devId="restaurant-name" 
+                devName="Restaurant Name" 
+                devDescription="Bella Vista restaurant brand name"
+                className="text-3xl font-bold text-white"
               >
-                View on GitHub
-              </Button>
+                Bella Vista
+              </Span>
             </Div>
-          </Div>
-        </Section>
-      </Container>
+            <Div 
+              devId="nav-actions" 
+              devName="Navigation Actions" 
+              devDescription="Navigation buttons and user menu"
+              className="flex items-center space-x-6"
+            >
+              <a href="#menu" className="text-xl text-gray-300 hover:text-red-400 transition-colors">Menu</a>
+              <a href="#reservations" className="text-xl text-gray-300 hover:text-red-400 transition-colors">Reservations</a>
+              <a href="#contact" className="text-xl text-gray-300 hover:text-red-400 transition-colors">Contact</a>
+              {isAuthenticated ? (
+                <Div 
+                  devId="user-section" 
+                  devName="User Section" 
+                  devDescription="Authenticated user welcome area"
+                  className="flex items-center space-x-4"
+                >
+                  <Span 
+                    devId="welcome-message" 
+                    devName="Welcome Message" 
+                    devDescription="Welcome message for authenticated user"
+                    className="text-xl text-gray-300"
+                  >
+                    Welcome, {user?.name?.split(' ')[0]}!
+                  </Span>
+                  <Link to="/dashboard">
+                    <Button 
+                      devId="nav-dashboard-button"
+                      devName="Navigation Dashboard Button"
+                      devDescription="Dashboard button in navigation header for authenticated users"
+                      className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors text-lg font-semibold"
+                    >
+                      <User className="w-5 h-5 mr-2" />
+                      Dashboard
+                    </Button>
+                  </Link>
+                </Div>
+              ) : (
+                <Div 
+                  devId="auth-buttons" 
+                  devName="Authentication Buttons" 
+                  devDescription="Login and register buttons for unauthenticated users"
+                  className="flex items-center space-x-3"
+                >
+                  <Link to="/login">
+                    <Button 
+                      devId="nav-login-button"
+                      devName="Navigation Login Button"
+                      devDescription="Login button in navigation header"
+                      variant="ghost" 
+                      className="text-xl text-gray-300 hover:text-white transition-colors"
+                    >
+                      Staff Login
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button 
+                      devId="nav-register-button"
+                      devName="Navigation Register Button"
+                      devDescription="Register button in navigation header"
+                      className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors text-lg font-semibold"
+                    >
+                      Join Team
+                    </Button>
+                  </Link>
+                </Div>
+              )}
+            </Div>
+          </Nav>
+        </Header>
 
-      {/* Stats Section */}
-      <Container componentId="stats-section"> {/* Changed to direct ID */}
-        <Section 
-          devId="stats-content" 
-          devName="Stats Content" 
-          devDescription="Statistics Section showing performance metrics"
-          className="container mx-auto px-4 py-12"
-        >
-          <Div 
-            devId="stats-grid" 
-            devName="Stats Grid" 
-            devDescription="Grid container for statistics cards"
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+        {/* Hero Section */}
+        <Container componentId="hero-section">
+          <Section 
+            devId="hero-content" 
+            devName="Hero Content" 
+            devDescription="Main hero section with restaurant showcase"
+            className="container mx-auto px-4 py-20 text-center"
           >
-            {stats.map((stat, index) => (
-              <Card 
-                key={index} 
-                devId={getStatCardId(index)}
-                devName={`${stat.label} Stat Card`}
-                devDescription={`Statistical card showing ${stat.label}: ${stat.value}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center border border-white/10"
+            <Div 
+              devId="hero-content-wrapper" 
+              devName="Hero Content Wrapper" 
+              devDescription="Animated wrapper for hero content"
+              className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            >
+              <H1 
+                devId="hero-title" 
+                devName="Hero Title" 
+                devDescription="Main hero title showcasing the restaurant"
+                className="text-6xl md:text-8xl font-bold text-white mb-8"
               >
-                <CardContent devId="noID"  className="p-0">
-                  <Div devId="noID" className="text-2xl font-bold text-white mb-2">{stat.value}</Div>
-                  <Div devId="noID" className="text-gray-400">{stat.label}</Div>
-                </CardContent>
-              </Card>
-            ))}
-          </Div>
-        </Section>
-      </Container>
+                Exquisite Dining
+                <Span 
+                  devId="experience-highlight" 
+                  devName="Experience Highlight" 
+                  devDescription="Highlighted experience text in red gradient"
+                  className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent"
+                >
+                  Experience
+                </Span>
+              </H1>
+              <P 
+                devId="hero-description" 
+                devName="Hero Description" 
+                devDescription="Hero section description explaining the restaurant experience"
+                className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+              >
+                Indulge in culinary artistry where every dish tells a story of passion, 
+                precision, and the finest ingredients from around the world.
+              </P>
+              <Div 
+                devId="hero-cta-buttons" 
+                devName="Hero CTA Buttons" 
+                devDescription="Call-to-action buttons in hero section"
+                className="flex flex-col sm:flex-row gap-6 justify-center"
+              >
+                <a href="#reservations">
+                  <Button 
+                    devId="hero-reserve-button"
+                    devName="Reserve Table Button"
+                    devDescription="Primary call-to-action button for table reservations"
+                    className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-10 py-4 rounded-lg font-bold text-xl transition-all transform hover:scale-105"
+                  >
+                    <Calendar className="w-6 h-6 mr-3" />
+                    Reserve Your Table
+                  </Button>
+                </a>
+                <a href="#menu">
+                  <Button 
+                    devId="hero-menu-button"
+                    devName="View Menu Button"
+                    devDescription="Secondary button to view the menu"
+                    variant="outline"
+                    className="border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-10 py-4 rounded-lg font-bold text-xl transition-all"
+                  >
+                    <Utensils className="w-6 h-6 mr-3" />
+                    View Our Menu
+                  </Button>
+                </a>
+              </Div>
+            </Div>
+          </Section>
+        </Container>
 
-      {/* Features Section */}
-      <Container componentId="features-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Why Choose This Template?</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Everything you need to build modern web applications with the latest technologies
-            </P>
-          </Div>
-          <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
+        {/* Features Section */}
+        <Container componentId="features-section">
+          <Section devId="noID" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Why Choose Bella Vista?</H2>
+              <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Experience the perfect blend of culinary excellence, elegant ambiance, and exceptional service
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <Card 
+                  key={index} 
+                  devId={getFeatureCardId(index)}
+                  devName={`${feature.title} Feature Card`}
+                  devDescription={`Feature card highlighting ${feature.title}: ${feature.description}`}
+                  className="bg-gray-900 border border-gray-800 rounded-xl p-8 hover:border-red-500/50 transition-all transform hover:scale-105"
+                >
+                  <CardContent devId="noID" className="p-0 text-center">
+                    <Div devId="noID" className="mb-6">{feature.icon}</Div>
+                    <H3 className="text-2xl font-bold text-white mb-4">{feature.title}</H3>
+                    <P devId="noID" className="text-lg text-gray-400 leading-relaxed">{feature.description}</P>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Menu Highlights Section */}
+        <Container componentId="menu-section">
+          <Section devId="noID" id="menu" className="container mx-auto px-4 py-20 bg-gray-900/50">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Menu Highlights</H2>
+              <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Discover our signature dishes crafted with passion and the finest ingredients
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {menuHighlights.map((item, index) => (
+                <Card 
+                  key={index} 
+                  devId={getMenuItemId(index)}
+                  devName={`${item.name} Menu Item`}
+                  devDescription={`Menu item card for ${item.name}: ${item.description}`}
+                  className="bg-black border border-gray-800 rounded-xl p-6 hover:border-red-500/50 transition-all"
+                >
+                  <CardContent devId="noID" className="p-0">
+                    <Div devId="noID" className="flex justify-between items-start mb-4">
+                      <Badge 
+                        devId="noID"
+                        className="bg-red-600 text-white text-sm font-semibold"
+                      >
+                        {item.category}
+                      </Badge>
+                      <Span devId="noID" className="text-2xl font-bold text-red-400">{item.price}</Span>
+                    </Div>
+                    <H3 className="text-xl font-bold text-white mb-3">{item.name}</H3>
+                    <P devId="noID" className="text-gray-400 leading-relaxed">{item.description}</P>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Reservation Section */}
+        <Container componentId="reservation-section">
+          <Section devId="noID" id="reservations" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="max-w-4xl mx-auto">
+              <Div devId="noID" className="text-center mb-12">
+                <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Make a Reservation</H2>
+                <P devId="noID" className="text-xl text-gray-300">
+                  Book your table for an unforgettable dining experience
+                </P>
+              </Div>
               <Card 
-                key={index} 
-                devId={getFeatureCardId(index)}
-                devName={`${feature.title} Feature Card`}
-                devDescription={`Feature card highlighting ${feature.title}: ${feature.description}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-500/50 transition-all"
+                devId="reservation-form-card"
+                devName="Reservation Form Card"
+                devDescription="Card containing the table reservation form"
+                className="bg-gray-900 border border-gray-800 rounded-xl p-8"
               >
                 <CardContent devId="noID" className="p-0">
-                  <Div devId="noID" className="mb-4">{feature.icon}</Div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <P devId="noID" className="text-gray-400">{feature.description}</P>
+                  <form onSubmit={handleReservationSubmit} className="space-y-6">
+                    <Div devId="noID" className="grid md:grid-cols-2 gap-6">
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Full Name</label>
+                        <input
+                          type="text"
+                          required
+                          value={reservationForm.name}
+                          onChange={(e) => setReservationForm({...reservationForm, name: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                          placeholder="Enter your full name"
+                        />
+                      </Div>
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Email</label>
+                        <input
+                          type="email"
+                          required
+                          value={reservationForm.email}
+                          onChange={(e) => setReservationForm({...reservationForm, email: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                          placeholder="Enter your email"
+                        />
+                      </Div>
+                    </Div>
+                    <Div devId="noID" className="grid md:grid-cols-2 gap-6">
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Phone</label>
+                        <input
+                          type="tel"
+                          required
+                          value={reservationForm.phone}
+                          onChange={(e) => setReservationForm({...reservationForm, phone: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                          placeholder="Enter your phone number"
+                        />
+                      </Div>
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Number of Guests</label>
+                        <select
+                          value={reservationForm.guests}
+                          onChange={(e) => setReservationForm({...reservationForm, guests: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                        >
+                          {[1,2,3,4,5,6,7,8,9,10].map(num => (
+                            <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
+                          ))}
+                        </select>
+                      </Div>
+                    </Div>
+                    <Div devId="noID" className="grid md:grid-cols-2 gap-6">
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Date</label>
+                        <input
+                          type="date"
+                          required
+                          value={reservationForm.date}
+                          onChange={(e) => setReservationForm({...reservationForm, date: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                        />
+                      </Div>
+                      <Div devId="noID">
+                        <label className="block text-lg font-semibold text-white mb-2">Time</label>
+                        <select
+                          required
+                          value={reservationForm.time}
+                          onChange={(e) => setReservationForm({...reservationForm, time: e.target.value})}
+                          className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                        >
+                          <option value="">Select time</option>
+                          <option value="17:00">5:00 PM</option>
+                          <option value="17:30">5:30 PM</option>
+                          <option value="18:00">6:00 PM</option>
+                          <option value="18:30">6:30 PM</option>
+                          <option value="19:00">7:00 PM</option>
+                          <option value="19:30">7:30 PM</option>
+                          <option value="20:00">8:00 PM</option>
+                          <option value="20:30">8:30 PM</option>
+                          <option value="21:00">9:00 PM</option>
+                          <option value="21:30">9:30 PM</option>
+                        </select>
+                      </Div>
+                    </Div>
+                    <Div devId="noID">
+                      <label className="block text-lg font-semibold text-white mb-2">Special Requests</label>
+                      <textarea
+                        value={reservationForm.specialRequests}
+                        onChange={(e) => setReservationForm({...reservationForm, specialRequests: e.target.value})}
+                        className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white text-lg focus:border-red-500 focus:outline-none"
+                        rows={4}
+                        placeholder="Any special requests or dietary restrictions?"
+                      />
+                    </Div>
+                    <Button 
+                      devId="submit-reservation"
+                      devName="Submit Reservation Button"
+                      devDescription="Button to submit the reservation form"
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-8 py-4 rounded-lg font-bold text-xl transition-all transform hover:scale-105"
+                    >
+                      <Calendar className="w-6 h-6 mr-3" />
+                      Reserve Table
+                    </Button>
+                  </form>
                 </CardContent>
               </Card>
-            ))}
-          </Div>
-        </Section>
-      </Container>
+            </Div>
+          </Section>
+        </Container>
 
-      {/* Tech Stack Section */}
-      <Container componentId="tech-stack-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Modern Tech Stack</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Built with the most popular and reliable technologies
-            </P>
-          </Div>
-          <Div devId="noID" className="grid grid-cols-2 md:grid-cols-6 gap-8">
-            {[
-              { name: "Vite", color: "from-yellow-400 to-orange-500" },
-              { name: "React", color: "from-blue-400 to-cyan-400" },
-              { name: "TypeScript", color: "from-blue-500 to-blue-600" },
-              { name: "MongoDB", color: "from-green-400 to-green-500" },
-              { name: "Prisma", color: "from-purple-400 to-purple-500" },
-              { name: "Tailwind", color: "from-teal-400 to-teal-500" }
-            ].map((tech, index) => (
-              <Div key={index} devId="noID" className="text-center">
-                <Div devId={getTechLetterId(index)} className={`w-16 h-16 mx-auto mb-3 rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center`}>
-                  <span className="text-white font-bold text-lg">{tech.name[0]}</span>
-                </Div>
-                <Badge 
-                  devId={getTechBadgeId(index)}
-                  devName={`${tech.name} Technology Badge`}
-                  devDescription={`Technology badge for ${tech.name}`}
-                  className="text-gray-300 font-medium bg-transparent border-none"
+        {/* Testimonials Section */}
+        <Container componentId="testimonials-section">
+          <Section devId="noID" className="container mx-auto px-4 py-20 bg-gray-900/50">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">What Our Guests Say</H2>
+              <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Read reviews from our satisfied customers who experienced our exceptional service
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card 
+                  key={index} 
+                  devId={getTestimonialId(index)}
+                  devName={`${testimonial.name} Testimonial`}
+                  devDescription={`Customer testimonial from ${testimonial.name}`}
+                  className="bg-black border border-gray-800 rounded-xl p-6"
                 >
-                  {tech.name}
-                </Badge>
-              </Div>
-            ))}
-          </Div>
-        </Section>
-      </Container>
+                  <CardContent devId="noID" className="p-0">
+                    <Div devId="noID" className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-6 h-6 text-red-500 fill-current" />
+                      ))}
+                    </Div>
+                    <P devId="noID" className="text-gray-300 mb-4 text-lg leading-relaxed">"{testimonial.comment}"</P>
+                    <P devId="noID" className="text-white font-semibold text-lg">- {testimonial.name}</P>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
 
-      {/* CTA Section */}
-      <Container componentId="cta-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-12 text-center border border-purple-500/30">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Ready to Build Something Amazing?</H2>
-            <P devId="noID" className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Get started with this template and build your next project with confidence
-            </P>
-            <Div devId="noID" className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                devId="cta-start-project"
-                devName="Start Project Button"
-                devDescription="Primary CTA button to start a new project"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+        {/* Contact Section */}
+        <Container componentId="contact-section">
+          <Section devId="noID" id="contact" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Visit Us</H2>
+              <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Find us in the heart of the city for an unforgettable dining experience
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-3 gap-8">
+              <Card 
+                devId="location-card"
+                devName="Location Card"
+                devDescription="Restaurant location information card"
+                className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center"
               >
-                <span className="flex items-center gap-2">
-                  <Star className="w-5 h-5" />
-                  Start Project
-                </span>
-              </Button>
-              <Button 
-                devId="cta-join-community"
-                devName="Join Community Button"
-                devDescription="Secondary CTA button to join the community"
-                variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                <CardContent devId="noID" className="p-0">
+                  <MapPin className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                  <H3 className="text-2xl font-bold text-white mb-4">Location</H3>
+                  <P devId="noID" className="text-lg text-gray-300">
+                    123 Gourmet Street<br />
+                    Downtown District<br />
+                    New York, NY 10001
+                  </P>
+                </CardContent>
+              </Card>
+              <Card 
+                devId="hours-card"
+                devName="Hours Card"
+                devDescription="Restaurant hours information card"
+                className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center"
               >
-                <span className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  Join Community
-                </span>
-              </Button>
+                <CardContent devId="noID" className="p-0">
+                  <Clock className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                  <H3 className="text-2xl font-bold text-white mb-4">Hours</H3>
+                  <P devId="noID" className="text-lg text-gray-300">
+                    Monday - Thursday: 5:00 PM - 10:00 PM<br />
+                    Friday - Saturday: 5:00 PM - 11:00 PM<br />
+                    Sunday: 4:00 PM - 9:00 PM
+                  </P>
+                </CardContent>
+              </Card>
+              <Card 
+                devId="contact-info-card"
+                devName="Contact Info Card"
+                devDescription="Restaurant contact information card"
+                className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center"
+              >
+                <CardContent devId="noID" className="p-0">
+                  <Phone className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                  <H3 className="text-2xl font-bold text-white mb-4">Contact</H3>
+                  <P devId="noID" className="text-lg text-gray-300">
+                    Phone: (555) 123-4567<br />
+                    Email: info@bellavista.com<br />
+                    Reservations: (555) 123-4568
+                  </P>
+                </CardContent>
+              </Card>
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Footer */}
+        <Footer 
+          devId="restaurant-footer" 
+          devName="Restaurant Footer" 
+          devDescription="Restaurant footer with links and copyright"
+          className="container mx-auto px-4 py-12 border-t border-gray-800"
+        >
+          <Div devId="noID" className="grid md:grid-cols-4 gap-8 mb-8">
+            <Div devId="noID">
+              <H3 className="text-xl font-bold text-white mb-4">Bella Vista</H3>
+              <P devId="noID" className="text-gray-400 leading-relaxed">
+                Experience culinary excellence in the heart of the city. Where every meal is a celebration.
+              </P>
+            </Div>
+            <Div devId="noID">
+              <H3 className="text-xl font-bold text-white mb-4">Quick Links</H3>
+              <Div devId="noID" className="space-y-2">
+                <a href="#menu" className="block text-gray-400 hover:text-red-400 transition-colors">Menu</a>
+                <a href="#reservations" className="block text-gray-400 hover:text-red-400 transition-colors">Reservations</a>
+                <a href="#contact" className="block text-gray-400 hover:text-red-400 transition-colors">Contact</a>
+                <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Private Events</a>
+              </Div>
+            </Div>
+            <Div devId="noID">
+              <H3 className="text-xl font-bold text-white mb-4">Contact Info</H3>
+              <Div devId="noID" className="space-y-2">
+                <P devId="noID" className="text-gray-400 flex items-center">
+                  <Phone className="w-4 h-4 mr-2" />
+                  (555) 123-4567
+                </P>
+                <P devId="noID" className="text-gray-400 flex items-center">
+                  <Mail className="w-4 h-4 mr-2" />
+                  info@bellavista.com
+                </P>
+                <P devId="noID" className="text-gray-400 flex items-center">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  123 Gourmet Street
+                </P>
+              </Div>
+            </Div>
+            <Div devId="noID">
+              <H3 className="text-xl font-bold text-white mb-4">Follow Us</H3>
+              <Div devId="noID" className="space-y-2">
+                <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Facebook</a>
+                <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Instagram</a>
+                <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Twitter</a>
+                <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Yelp</a>
+              </Div>
             </Div>
           </Div>
-        </Section>
-      </Container>
-
-      {/* Footer */}
-      <Footer 
-        devId="main-footer" 
-        devName="Main Footer" 
-        devDescription="Site footer with links and copyright"
-        className="container mx-auto px-4 py-8 border-t border-white/10"
-      >
-        <Div devId="noID" className="flex flex-col md:flex-row justify-between items-center">
-          <Div devId="noID" className="text-gray-400 mb-4 md:mb-0">
-            © 2024 Geenius Template. Built with ❤️ for developers.
+          <Div devId="noID" className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
+            <Div devId="noID" className="text-gray-400 mb-4 md:mb-0 text-lg">
+              © 2024 Bella Vista Restaurant. All rights reserved.
+            </Div>
+            <Div devId="noID" className="flex space-x-6">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+            </Div>
           </Div>
-          <Div devId="noID" className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentation</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a>
-          </Div>
-        </Div>
-      </Footer>
+        </Footer>
       </Div>
     </Container>
   );
