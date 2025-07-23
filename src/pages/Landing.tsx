@@ -1,7 +1,7 @@
 // src/pages/Landing.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, Users, Star, Phone, MapPin, Mail, ChefHat, Utensils, Wine, User } from 'lucide-react';
+import { Calendar, Clock, Star, Phone, MapPin, Mail, ChefHat, Utensils, Wine, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, Card, CardContent, Badge, Header, Nav, Section, Span, H1, H2, H3, P, Div, Footer } from '../lib/dev-container';
 import { useAuth } from '../components/auth/AuthProvider';
@@ -322,7 +322,7 @@ export const Landing: React.FC = () => {
         <Container componentId="features-section">
           <Section devId="noID" className="container mx-auto px-4 py-20">
             <Div devId="noID" className="text-center mb-16">
-              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Why Choose Bella Vista?</H2>
+              <H2 devId="features-section-title" className="text-5xl font-bold text-white mb-6">Why Choose Bella Vista?</H2>
               <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Experience the perfect blend of culinary excellence, elegant ambiance, and exceptional service
               </P>
@@ -338,7 +338,7 @@ export const Landing: React.FC = () => {
                 >
                   <CardContent devId="noID" className="p-0 text-center">
                     <Div devId="noID" className="mb-6">{feature.icon}</Div>
-                    <H3 className="text-2xl font-bold text-white mb-4">{feature.title}</H3>
+                    <H3 devId="noID" className="text-2xl font-bold text-white mb-4">{feature.title}</H3>
                     <P devId="noID" className="text-lg text-gray-400 leading-relaxed">{feature.description}</P>
                   </CardContent>
                 </Card>
@@ -351,7 +351,7 @@ export const Landing: React.FC = () => {
         <Container componentId="menu-section">
           <Section devId="noID" id="menu" className="container mx-auto px-4 py-20 bg-gray-900/50">
             <Div devId="noID" className="text-center mb-16">
-              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Menu Highlights</H2>
+              <H2 devId="menu-highlights-title" className="text-5xl font-bold text-white mb-6">Menu Highlights</H2>
               <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Discover our signature dishes crafted with passion and the finest ingredients
               </P>
@@ -375,7 +375,7 @@ export const Landing: React.FC = () => {
                       </Badge>
                       <Span devId="noID" className="text-2xl font-bold text-red-400">{item.price}</Span>
                     </Div>
-                    <H3 className="text-xl font-bold text-white mb-3">{item.name}</H3>
+                    <H3 devId="noID" className="text-xl font-bold text-white mb-3">{item.name}</H3>
                     <P devId="noID" className="text-gray-400 leading-relaxed">{item.description}</P>
                   </CardContent>
                 </Card>
@@ -389,7 +389,7 @@ export const Landing: React.FC = () => {
           <Section devId="noID" id="reservations" className="container mx-auto px-4 py-20">
             <Div devId="noID" className="max-w-4xl mx-auto">
               <Div devId="noID" className="text-center mb-12">
-                <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Make a Reservation</H2>
+                <H2 devId="reservation-title" className="text-5xl font-bold text-white mb-6">Make a Reservation</H2>
                 <P devId="noID" className="text-xl text-gray-300">
                   Book your table for an unforgettable dining experience
                 </P>
@@ -515,7 +515,7 @@ export const Landing: React.FC = () => {
         <Container componentId="testimonials-section">
           <Section devId="noID" className="container mx-auto px-4 py-20 bg-gray-900/50">
             <Div devId="noID" className="text-center mb-16">
-              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">What Our Guests Say</H2>
+              <H2 devId="testimonials-title" className="text-5xl font-bold text-white mb-6">What Our Guests Say</H2>
               <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Read reviews from our satisfied customers who experienced our exceptional service
               </P>
@@ -548,7 +548,7 @@ export const Landing: React.FC = () => {
         <Container componentId="contact-section">
           <Section devId="noID" id="contact" className="container mx-auto px-4 py-20">
             <Div devId="noID" className="text-center mb-16">
-              <H2 devId="noID" className="text-5xl font-bold text-white mb-6">Visit Us</H2>
+              <H2 devId="contact-section-title" className="text-5xl font-bold text-white mb-6">Visit Us</H2>
               <P devId="noID" className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Find us in the heart of the city for an unforgettable dining experience
               </P>
@@ -562,7 +562,7 @@ export const Landing: React.FC = () => {
               >
                 <CardContent devId="noID" className="p-0">
                   <MapPin className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <H3 className="text-2xl font-bold text-white mb-4">Location</H3>
+                  <H3 devId="location-title" className="text-2xl font-bold text-white mb-4">Location</H3>
                   <P devId="noID" className="text-lg text-gray-300">
                     123 Gourmet Street<br />
                     Downtown District<br />
@@ -578,7 +578,7 @@ export const Landing: React.FC = () => {
               >
                 <CardContent devId="noID" className="p-0">
                   <Clock className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <H3 className="text-2xl font-bold text-white mb-4">Hours</H3>
+                  <H3 devId="hours-title" className="text-2xl font-bold text-white mb-4">Hours</H3>
                   <P devId="noID" className="text-lg text-gray-300">
                     Monday - Thursday: 5:00 PM - 10:00 PM<br />
                     Friday - Saturday: 5:00 PM - 11:00 PM<br />
@@ -594,7 +594,7 @@ export const Landing: React.FC = () => {
               >
                 <CardContent devId="noID" className="p-0">
                   <Phone className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <H3 className="text-2xl font-bold text-white mb-4">Contact</H3>
+                  <H3 devId="contact-info-title" className="text-2xl font-bold text-white mb-4">Contact</H3>
                   <P devId="noID" className="text-lg text-gray-300">
                     Phone: (555) 123-4567<br />
                     Email: info@bellavista.com<br />
@@ -615,13 +615,13 @@ export const Landing: React.FC = () => {
         >
           <Div devId="noID" className="grid md:grid-cols-4 gap-8 mb-8">
             <Div devId="noID">
-              <H3 className="text-xl font-bold text-white mb-4">Bella Vista</H3>
+              <H3 devId="footer-brand-title" className="text-xl font-bold text-white mb-4">Bella Vista</H3>
               <P devId="noID" className="text-gray-400 leading-relaxed">
                 Experience culinary excellence in the heart of the city. Where every meal is a celebration.
               </P>
             </Div>
             <Div devId="noID">
-              <H3 className="text-xl font-bold text-white mb-4">Quick Links</H3>
+              <H3 devId="footer-links-title" className="text-xl font-bold text-white mb-4">Quick Links</H3>
               <Div devId="noID" className="space-y-2">
                 <a href="#menu" className="block text-gray-400 hover:text-red-400 transition-colors">Menu</a>
                 <a href="#reservations" className="block text-gray-400 hover:text-red-400 transition-colors">Reservations</a>
@@ -630,7 +630,7 @@ export const Landing: React.FC = () => {
               </Div>
             </Div>
             <Div devId="noID">
-              <H3 className="text-xl font-bold text-white mb-4">Contact Info</H3>
+              <H3 devId="footer-contact-title" className="text-xl font-bold text-white mb-4">Contact Info</H3>
               <Div devId="noID" className="space-y-2">
                 <P devId="noID" className="text-gray-400 flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
@@ -647,7 +647,7 @@ export const Landing: React.FC = () => {
               </Div>
             </Div>
             <Div devId="noID">
-              <H3 className="text-xl font-bold text-white mb-4">Follow Us</H3>
+              <H3 devId="footer-social-title" className="text-xl font-bold text-white mb-4">Follow Us</H3>
               <Div devId="noID" className="space-y-2">
                 <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Facebook</a>
                 <a href="#" className="block text-gray-400 hover:text-red-400 transition-colors">Instagram</a>
